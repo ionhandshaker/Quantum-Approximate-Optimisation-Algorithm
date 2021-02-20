@@ -1,23 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 15 07:28:07 2021
-
-@author: ppznp1
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb  4 17:11:28 2021
-
-@author: ppznp1
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb  4 01:54:57 2021
-
-@author: ppznp1
-"""
 
 import networkx as nx
 #from matplotlib import pyplot as plt
