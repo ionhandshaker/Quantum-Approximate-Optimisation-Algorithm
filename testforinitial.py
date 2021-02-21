@@ -19,11 +19,11 @@ class Edge:
         self.end_node = end_node
         self.weight = weight
 
- #A list containing 
+ #A list of classes containing the numbered vertices, edges and their weights 
 set_edges = [Edge(0, 1,10), Edge(1, 2,1), Edge(2,3,10), Edge(3,4,5), Edge(4,5,30),Edge(5,6,20),Edge(6,7,5)];
 
 
-
+#initialisation of number of qubits and greater depth
 num = 8;
 depth = 8
 rep = 1000
@@ -57,7 +57,7 @@ def mixer_unitary(qubits, alpha):
 
 def create_circuit(params):
 
-    
+    #change in the optimal parameter feeding
     gamma,alpha=np.array_split(params,2)
     
     circuit = cirq.Circuit()
@@ -93,12 +93,14 @@ def cost_function(params):
 
     return total_cost
 
+#initial value determination for cost and mixer unitaries
 step_size   = 0.05;
 
 a_gamma         = np.arange(0, np.pi, step_size)
 a_beta          = np.arange(0, np.pi, step_size)
 a_gamma, a_beta = np.meshgrid(a_gamma,a_beta)
 
+#The expectation value function calculated analytically
 F1 = 3-(np.sin(2*a_beta)**2*np.sin(2*a_gamma)**2-0.5*np.sin(4*a_beta)*np.sin(4*a_gamma))*(1+np.cos(4*a_gamma)**2)
 
 result = np.where(F1 == np.amax(F1))
@@ -107,13 +109,14 @@ a      = list(zip(result[0],result[1]))[0]
 calcgamma  = a[0]*step_size;
 calcbeta   = a[1]*step_size;
 
+#Linear interpolation from the calculated expectation value using the INTERP method
 reqalpha = np.linspace(calcbeta,((depth+1)/depth)*calcbeta,depth)
 reqgamma = np.linspace(calcgamma,((depth+1)/depth)*calcgamma,depth)
 
 init=np.concatenate((reqalpha,reqgamma))
 
 
-
+#Execution of QAOA algorithm
 out = minimize(cost_function, x0=init, method="COBYLA", options={'maxiter':100})
 print(out)
 
@@ -123,6 +126,7 @@ f = create_circuit(optimal_params)
 nums = []
 freq = []
 
+#plotting the data
 for i in range(0, len(f)):
     number = 0
     for j in range(0, len(f[i])):
