@@ -1,4 +1,5 @@
 
+#Initial importing of the packages
 import networkx as nx
 
 import cirq
@@ -9,6 +10,8 @@ import random
 from scipy.optimize import minimize
 
 
+#The Edges have been considered as classes 
+#and the property of weight has been added to them
 
 class Edge:
     def __init__(self, start_node, end_node, weight):
@@ -16,6 +19,7 @@ class Edge:
         self.end_node = end_node
         self.weight = weight
 
+ #A list containing 
 set_edges = [Edge(0, 1,10), Edge(1, 2,1), Edge(2,3,10), Edge(3,4,5), Edge(4,5,30),Edge(5,6,20),Edge(6,7,5)];
 
 
